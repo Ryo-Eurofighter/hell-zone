@@ -11,7 +11,7 @@
       --card-inner: rgba(0, 0, 0, 0.35);
       --accent: #00f0ff;
       --accent-glow: rgba(0, 240, 255, 0.28);
-      --glyph-glow: rgba(255, 255, 255, 0.8);
+      --glyph-glow: rgba(255, 255, 255, 0.85);
       --border: rgba(255, 255, 255, 0.08);
       --text: #f0f4f8;
       --text-muted: #7e8c9f;
@@ -82,11 +82,11 @@
       align-items: center;
     }
 
-    /* ИДЕАЛЬНО ОТЦЕНТРОВАННЫЙ БЛОК ГЛИФОВ */
+    /* АВАТАРКА И ГЛИФЫ NOTHING PHONE (3A) */
     .avatar-container {
       position: relative;
       width: 160px;
-      height: 1060px;
+      height: 160px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -100,20 +100,20 @@
       width: 160px;
       height: 160px;
       pointer-events: none;
-      filter: drop-shadow(0 0 7px var(--glyph-glow));
+      filter: drop-shadow(0 0 8px var(--glyph-glow));
       animation: glyphBlink 4s infinite ease-in-out;
       z-index: 1;
     }
 
     .avatar-container:hover .glyph-svg {
-      filter: drop-shadow(0 0 14px #fff);
+      filter: drop-shadow(0 0 15px #fff);
       animation: none;
       opacity: 1;
     }
 
     .avatar {
-      width: 100px;
-      height: 100px;
+      width: 98px;
+      height: 98px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid rgba(255, 255, 255, 0.2);
@@ -455,20 +455,18 @@
     <div class="profile-card">
       <div class="left-col">
         <div class="avatar-container">
-          <!-- Геометрически выверенные глифы Phone (3a) вокруг круга 100px (R=50) -->
+          <!-- Заводская геометрия глифов Nothing Phone (3a) -->
           <svg class="glyph-svg" viewBox="0 0 160 160">
-            <!-- 1. Верхняя левая дуга: R=63, от 135° до 240° -->
-            <path d="M 35.4 35.4 A 63 63 0 0 1 111.5 25.4" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
-            
-            <!-- 2. Нижняя левая палочка под 45° -->
-            <path d="M 32 128 L 44 116" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
-            
-            <!-- 3. Правая вертикальная дуга: R=63, от -35° до +40° -->
-            <path d="M 131.6 43.9 A 63 63 0 0 1 128.2 120.5" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+            <!-- 1. Верхняя левая дуга -->
+            <path d="M 23 68 A 62 62 0 0 1 65 21" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/>
+            <!-- 2. Нижняя диагональная полоска -->
+            <path d="M 27 125 L 43 109" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/>
+            <!-- 3. Правая вертикальная дуга -->
+            <path d="M 137 54 A 62 62 0 0 1 131 114" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/>
           </svg>
 
-          <!-- Твоя аватарка: если зальешь файл avatar.png в репозиторий, он сразу встанет сюда -->
-          <img class="avatar" src="avatar.jpg" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300'" alt="Avatar">
+          <!-- Автоподхват avatar.jpg / avatar.png -->
+          <img class="avatar" src="avatar.jpg" onerror="this.onerror=null; this.src='avatar.png';" alt="Avatar">
         </div>
 
         <div class="info-wrapper">
@@ -611,7 +609,7 @@
     const progressBar = document.getElementById('progress-bar');
     const timeDisplay = document.getElementById('time-display');
 
-    // Установка стартовой безопасной громкости 30%
+    // Безопасная комфортная громкость 30%
     audio.volume = 0.3;
 
     function setVolume(val) {
@@ -681,7 +679,6 @@
       return m + ':' + (s < 10 ? '0' : '') + s;
     }
 
-    // Аудио эффекты (громкость снижена)
     let audioCtx = null;
     function getAudioCtx() {
       if (!audioCtx) {
