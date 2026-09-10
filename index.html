@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile // ID Card</title>
+  <title>Ryo Eurofighter</title>
   <style>
     :root {
-      --bg: #090a0f;
-      --card-bg: rgba(18, 22, 34, 0.75);
+      --bg: #07080c;
+      --card-bg: rgba(14, 17, 26, 0.78);
       --accent: #00f0ff;
-      --accent-glow: rgba(0, 240, 255, 0.35);
-      --text: #e2e8f0;
-      --text-muted: #8492a6;
+      --accent-glow: rgba(0, 240, 255, 0.3);
       --border: rgba(255, 255, 255, 0.08);
+      --text: #f0f4f8;
+      --text-muted: #8b9bb4;
+      --btn-bg: rgba(255, 255, 255, 0.04);
+      --btn-hover: rgba(0, 240, 255, 0.12);
     }
 
     * {
@@ -23,158 +25,263 @@
     }
 
     body {
-      background-color: var(--bg);
-      background-image: 
-        radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 80%, rgba(120, 0, 255, 0.08) 0%, transparent 40%);
-      color: var(--text);
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .card {
-      width: 100%;
-      max-width: 420px;
-      background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 35px 28px;
+      background-color: var(--bg);
+      /* Сюда можно подставить ссылку на свой фон: background-image: url('bg.jpg'); */
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(138, 43, 226, 0.06) 0%, transparent 45%);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text);
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-      position: relative;
-      overflow: hidden;
+      padding: 40px 20px;
     }
 
-    .card::before {
+    /* Верхний контейнер карточки */
+    .profile-card {
+      width: 100%;
+      max-width: 900px;
+      background: var(--card-bg);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      position: relative;
+    }
+
+    .profile-card::before {
       content: "";
       position: absolute;
       top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
     }
 
+    /* ЛЕВАЯ КОЛОНКА */
+    .left-col {
+      display: flex;
+      gap: 20px;
+    }
+
     .avatar-wrapper {
-      position: relative;
-      margin-bottom: 20px;
+      flex-shrink: 0;
     }
 
     .avatar {
-      width: 100px;
-      height: 100px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--accent);
-      box-shadow: 0 0 20px var(--accent-glow);
+      box-shadow: 0 0 16px var(--accent-glow);
     }
 
-    .status-badge {
-      position: absolute;
-      bottom: 6px;
-      right: 6px;
-      width: 14px;
-      height: 14px;
-      background: #00ff66;
-      border-radius: 50%;
-      border: 2px solid var(--bg);
-      box-shadow: 0 0 8px #00ff66;
+    .info-wrapper {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
     }
 
-    .name {
-      font-size: 1.5rem;
+    .title {
+      font-size: 1.55rem;
       font-weight: 700;
       letter-spacing: 0.5px;
-      margin-bottom: 4px;
-    }
-
-    .tagline {
-      font-size: 0.85rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      color: #fff;
       margin-bottom: 12px;
     }
 
-    .bio {
+    .bio-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
       font-size: 0.92rem;
-      color: var(--text-muted);
-      text-align: center;
       line-height: 1.5;
-      margin-bottom: 24px;
+      color: var(--text-muted);
+      height: 100%;
+      min-height: 90px;
     }
 
-    .links {
-      width: 100%;
+    /* ПРАВАЯ КОЛОНКА (КНОПКИ) */
+    .right-col {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      justify-content: center;
     }
 
-    .btn-link {
+    .btn {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 13px 18px;
-      background: rgba(255, 255, 255, 0.03);
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: var(--btn-bg);
       border: 1px solid var(--border);
       border-radius: 12px;
       color: var(--text);
-      text-decoration: none;
       font-size: 0.95rem;
       font-weight: 500;
-      transition: all 0.25s ease;
+      text-decoration: none;
       cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
     }
 
-    .btn-link:hover {
-      background: rgba(0, 240, 255, 0.1);
+    .btn:hover {
+      background: var(--btn-hover);
       border-color: var(--accent);
       box-shadow: 0 0 15px var(--accent-glow);
       transform: translateY(-2px);
       color: #fff;
     }
 
-    .footer-note {
-      margin-top: 24px;
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-action-hint {
       font-size: 0.75rem;
-      color: #555e70;
+      color: var(--text-muted);
+      text-transform: uppercase;
       letter-spacing: 1px;
+    }
+
+    /* ПЛАШКА УВЕДОМЛЕНИЯ (ТОСТЕР) */
+    .toast {
+      position: fixed;
+      bottom: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f1422;
+      border: 1px solid var(--accent);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-glow);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      bottom: 30px;
+      opacity: 1;
+    }
+
+    /* Адаптив для телефонов */
+    @media (max-width: 768px) {
+      .profile-card {
+        grid-template-columns: 1fr;
+        padding: 24px 18px;
+        gap: 24px;
+      }
+      .left-col {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <div class="avatar-wrapper">
-      <!-- Замени ссылку на свою аватарку -->
-      <img class="avatar" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300" alt="Avatar">
-      <div class="status-badge" title="Online"></div>
+  <div class="profile-card">
+    <!-- Левая колонка -->
+    <div class="left-col">
+      <div class="avatar-wrapper">
+        <img class="avatar" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300" alt="Avatar">
+      </div>
+      <div class="info-wrapper">
+        <h1 class="title">Ryo Eurofighter</h1>
+        <div class="bio-box">
+          описание которое я когда нибудь придумаю
+        </div>
+      </div>
     </div>
 
-    <!-- Твой ник или имя -->
-    <h1 class="name">Твой Ник</h1>
-    <div class="tagline">// Operator //</div>
-    <p class="bio">Короткое описание о себе, текущий статус, пара слов про увлечения или просто девиз.</p>
+    <!-- Правая колонка -->
+    <div class="right-col">
+      <a href="https://steamcommunity.com/profiles/76561199693464578/" target="_blank" class="btn" onclick="playClick()">
+        <span>Стим</span>
+        <span class="btn-action-hint">Перейти ↗</span>
+      </a>
 
-    <!-- Твои ссылки -->
-    <div class="links">
-      <a href="https://t.me/" target="_blank" class="btn-link">Telegram</a>
-      <a href="https://discord.com/" target="_blank" class="btn-link">Discord</a>
-      <a href="https://steamcommunity.com/" target="_blank" class="btn-link">Steam</a>
-      <a href="https://github.com/" target="_blank" class="btn-link">GitHub</a>
+      <button class="btn" onclick="copyText('ryo_hell', 'Скопировано: ryo_hell')">
+        <span>Дискорд</span>
+        <span class="btn-action-hint">Копировать</span>
+      </button>
+
+      <button class="btn" onclick="copyText('Hell_yet', 'Скопировано: Hell_yet')">
+        <span>Мой пс нетворк</span>
+        <span class="btn-action-hint">Копировать</span>
+      </button>
+
+      <button class="btn" onclick="showToast('терпи')">
+        <span>однажды</span>
+        <span class="btn-action-hint">???</span>
+      </button>
     </div>
-
-    <div class="footer-note">SYSTEM ONLINE</div>
   </div>
 
+  <!-- Плашка всплывашки -->
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // Генератор механического щелчка через аудио-движок
+    function playClick() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(140, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(35, audioCtx.currentTime + 0.04);
+
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.04);
+      } catch (e) {}
+    }
+
+    // Показ плашки
+    let toastTimeout;
+    function showToast(text) {
+      playClick();
+      const toast = document.getElementById('toast');
+      toast.innerText = text;
+      toast.classList.add('show');
+      
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
+    // Копирование в буфер
+    function copyText(text, message) {
+      navigator.clipboard.writeText(text);
+      showToast(message);
+    }
+  </script>
 </body>
 </html>
