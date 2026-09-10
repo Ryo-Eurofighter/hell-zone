@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ryo Eurofighter</title>
   <style>
     :root {
-      --bg: #07080c;
-      --card-bg: rgba(14, 17, 26, 0.78);
+      --bg: #07090e;
+      --card-bg: rgba(13, 17, 24, 0.82);
       --accent: #00f0ff;
-      --accent-glow: rgba(0, 240, 255, 0.3);
+      --accent-glow: rgba(0, 240, 255, 0.28);
+      --glyph-color: #ffffff;
+      --glyph-glow: rgba(255, 255, 255, 0.75);
       --border: rgba(255, 255, 255, 0.08);
       --text: #f0f4f8;
-      --text-muted: #8b9bb4;
-      --btn-bg: rgba(255, 255, 255, 0.04);
+      --text-muted: #7e8c9f;
+      --btn-bg: rgba(255, 255, 255, 0.035);
       --btn-hover: rgba(0, 240, 255, 0.12);
     }
 
@@ -21,16 +23,15 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
     }
 
     body {
       min-height: 100vh;
       background-color: var(--bg);
-      /* Сюда можно подставить ссылку на свой фон: background-image: url('bg.jpg'); */
       background-image: 
-        radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.06) 0%, transparent 45%),
-        radial-gradient(circle at 90% 80%, rgba(138, 43, 226, 0.06) 0%, transparent 45%);
+        radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 110, 255, 0.05) 0%, transparent 40%);
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -41,20 +42,19 @@
       padding: 40px 20px;
     }
 
-    /* Верхний контейнер карточки */
     .profile-card {
       width: 100%;
-      max-width: 900px;
+      max-width: 1060px;
       background: var(--card-bg);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 32px;
+      border-radius: 28px;
+      padding: 36px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      grid-template-columns: 1fr 1.2fr;
+      gap: 36px;
+      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.8);
       position: relative;
     }
 
@@ -62,8 +62,8 @@
       content: "";
       position: absolute;
       top: 0;
-      left: 10%;
-      right: 10%;
+      left: 12%;
+      right: 12%;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
     }
@@ -71,67 +71,106 @@
     /* ЛЕВАЯ КОЛОНКА */
     .left-col {
       display: flex;
-      gap: 20px;
+      gap: 24px;
+      align-items: center;
     }
 
-    .avatar-wrapper {
+    /* КОНТЕЙНЕР АВАТАРКИ И ГЛИФОВ */
+    .avatar-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       flex-shrink: 0;
     }
 
+    .glyph-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      filter: drop-shadow(0 0 6px var(--glyph-glow));
+      animation: glyphBlink 3.5s infinite ease-in-out;
+      transition: filter 0.3s ease;
+    }
+
+    .avatar-container:hover .glyph-svg {
+      filter: drop-shadow(0 0 12px #fff);
+      animation: none;
+      opacity: 1;
+    }
+
     .avatar {
-      width: 110px;
-      height: 110px;
+      width: 106px;
+      height: 106px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--accent);
-      box-shadow: 0 0 16px var(--accent-glow);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
+
+    .avatar-container:hover .avatar {
+      transform: scale(1.02);
+    }
+
+    @keyframes glyphBlink {
+      0%, 100% { opacity: 0.85; }
+      50% { opacity: 0.35; }
+      55% { opacity: 0.95; }
+      60% { opacity: 0.45; }
     }
 
     .info-wrapper {
       display: flex;
       flex-direction: column;
       flex-grow: 1;
+      height: 100%;
+      justify-content: center;
     }
 
     .title {
       font-size: 1.55rem;
       font-weight: 700;
       letter-spacing: 0.5px;
-      color: #fff;
       margin-bottom: 12px;
+      color: #fff;
     }
 
     .bio-box {
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(0, 0, 0, 0.4);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 16px;
-      font-size: 0.92rem;
-      line-height: 1.5;
+      font-size: 0.88rem;
+      line-height: 1.55;
       color: var(--text-muted);
-      height: 100%;
-      min-height: 90px;
+      min-height: 100px;
     }
 
-    /* ПРАВАЯ КОЛОНКА (КНОПКИ) */
+    /* ПРАВАЯ КОЛОНКА (СЕТКА 2x4) */
     .right-col {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 12px;
-      justify-content: center;
     }
 
     .btn {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 18px;
+      padding: 13px 16px;
       background: var(--btn-bg);
       border: 1px solid var(--border);
       border-radius: 12px;
       color: var(--text);
-      font-size: 0.95rem;
-      font-weight: 500;
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
       text-decoration: none;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -141,7 +180,7 @@
     .btn:hover {
       background: var(--btn-hover);
       border-color: var(--accent);
-      box-shadow: 0 0 15px var(--accent-glow);
+      box-shadow: 0 0 14px var(--accent-glow);
       transform: translateY(-2px);
       color: #fff;
     }
@@ -151,28 +190,29 @@
     }
 
     .btn-action-hint {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
+      opacity: 0.75;
     }
 
-    /* ПЛАШКА УВЕДОМЛЕНИЯ (ТОСТЕР) */
+    /* ТОСТЕР-УВЕДОМЛЕНИЕ */
     .toast {
       position: fixed;
       bottom: -60px;
       left: 50%;
       transform: translateX(-50%);
-      background: #0f1422;
+      background: #0d121c;
       border: 1px solid var(--accent);
       color: #fff;
-      padding: 12px 24px;
+      padding: 12px 26px;
       border-radius: 12px;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 600;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-glow);
+      letter-spacing: 0.5px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 15px var(--accent-glow);
       opacity: 0;
-      transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      transition: all 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.28);
       z-index: 100;
       pointer-events: none;
     }
@@ -182,17 +222,22 @@
       opacity: 1;
     }
 
-    /* Адаптив для телефонов */
-    @media (max-width: 768px) {
+    /* АДАПТИВНОСТЬ */
+    @media (max-width: 950px) {
       .profile-card {
         grid-template-columns: 1fr;
-        padding: 24px 18px;
+        padding: 24px;
         gap: 24px;
       }
+    }
+
+    @media (max-width: 550px) {
       .left-col {
         flex-direction: column;
-        align-items: center;
         text-align: center;
+      }
+      .right-col {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -200,70 +245,157 @@
 <body>
 
   <div class="profile-card">
-    <!-- Левая колонка -->
+    <!-- Левый блок -->
     <div class="left-col">
-      <div class="avatar-wrapper">
+      <div class="avatar-container">
+        <!-- Глифы Phone (3a) в SVG -->
+        <svg class="glyph-svg" viewBox="0 0 150 150">
+          <!-- Верхняя левая дуга -->
+          <path d="M 32 40 A 62 62 0 0 1 78 14" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/>
+          <!-- Нижняя левая косая полоска -->
+          <path d="M 31 110 L 44 123" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/>
+          <!-- Правая вертикальная дуга -->
+          <path d="M 136 64 A 62 62 0 0 1 131 116" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/>
+        </svg>
+
         <img class="avatar" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300" alt="Avatar">
       </div>
+
       <div class="info-wrapper">
         <h1 class="title">Ryo Eurofighter</h1>
         <div class="bio-box">
-          описание которое я когда нибудь придумаю
+          description coming soon...
         </div>
       </div>
     </div>
 
-    <!-- Правая колонка -->
+    <!-- Правый блок: Сетка 2x4 -->
     <div class="right-col">
+      <!-- 1. STEAM -->
       <a href="https://steamcommunity.com/profiles/76561199693464578/" target="_blank" class="btn" onclick="playClick()">
-        <span>Стим</span>
-        <span class="btn-action-hint">Перейти ↗</span>
+        <span>STEAM</span>
+        <span class="btn-action-hint">OPEN ↗</span>
       </a>
 
-      <button class="btn" onclick="copyText('ryo_hell', 'Скопировано: ryo_hell')">
-        <span>Дискорд</span>
-        <span class="btn-action-hint">Копировать</span>
+      <!-- 5. TIKTOK -->
+      <a href="https://www.tiktok.com/@hell_yet" target="_blank" class="btn" onclick="playClick()">
+        <span>TIKTOK</span>
+        <span class="btn-action-hint">OPEN ↗</span>
+      </a>
+
+      <!-- 2. DISCORD -->
+      <button class="btn" onclick="copyText('ryo_hell', 'COPIED: ryo_hell')">
+        <span>DISCORD</span>
+        <span class="btn-action-hint">COPY</span>
       </button>
 
-      <button class="btn" onclick="copyText('Hell_yet', 'Скопировано: Hell_yet')">
-        <span>Мой пс нетворк</span>
-        <span class="btn-action-hint">Копировать</span>
+      <!-- 6. DONATIONALERTS -->
+      <a href="https://www.donationalerts.com/r/hell_yet" target="_blank" class="btn" onclick="playClick()">
+        <span>DONATIONALERTS</span>
+        <span class="btn-action-hint">OPEN ↗</span>
+      </a>
+
+      <!-- 3. PSN -->
+      <button class="btn" onclick="copyText('Hell_yet', 'COPIED: Hell_yet')">
+        <span>PSN</span>
+        <span class="btn-action-hint">COPY</span>
       </button>
 
+      <!-- 7. FLYBY SOUND -->
+      <button class="btn" onclick="playFlyby()">
+        <span>FLYBY SOUND</span>
+        <span class="btn-action-hint">AUDIO ▶</span>
+      </button>
+
+      <!-- 4. SOMEDAY -->
       <button class="btn" onclick="showToast('терпи')">
-        <span>однажды</span>
+        <span>SOMEDAY</span>
         <span class="btn-action-hint">???</span>
       </button>
+
+      <!-- 8. FREE ROBUX (Rickroll) -->
+      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn" onclick="playClick()">
+        <span>FREE ROBUX ⚡</span>
+        <span class="btn-action-hint">CLAIM ↗</span>
+      </a>
     </div>
   </div>
 
-  <!-- Плашка всплывашки -->
   <div id="toast" class="toast"></div>
 
   <script>
-    // Генератор механического щелчка через аудио-движок
+    let audioCtx = null;
+    function getAudioCtx() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioCtx;
+    }
+
+    // Звук механического щелчка
     function playClick() {
       try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
+        const ctx = getAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
 
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(140, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(35, audioCtx.currentTime + 0.04);
+        osc.frequency.setValueAtTime(140, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(35, ctx.currentTime + 0.04);
 
-        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.25, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.04);
 
         osc.connect(gain);
-        gain.connect(audioCtx.destination);
+        gain.connect(ctx.destination);
 
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.04);
+        osc.stop(ctx.currentTime + 0.04);
       } catch (e) {}
     }
 
-    // Показ плашки
+    // Синтез звука реактивного истребителя на бреющем (Flyby)
+    function playFlyby() {
+      try {
+        const ctx = getAudioCtx();
+        const dur = 2.4;
+        const now = ctx.currentTime;
+
+        // Генерация белого шума (струя двигателя)
+        const bufferSize = ctx.sampleRate * dur;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
+
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        // Фильтр для эффекта Доплера (приближение и резкий спад частоты)
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.Q.value = 3.2;
+        filter.frequency.setValueAtTime(380, now);
+        filter.frequency.exponentialRampToValueAtTime(1600, now + 0.9);
+        filter.frequency.exponentialRampToValueAtTime(220, now + 2.3);
+
+        // Нарастание и спад громкости пролёта
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.01, now);
+        gain.gain.exponentialRampToValueAtTime(0.7, now + 0.9);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+
+        noise.start(now);
+        noise.stop(now + dur);
+      } catch (e) {}
+    }
+
+    // Плашка-тостер
     let toastTimeout;
     function showToast(text) {
       playClick();
