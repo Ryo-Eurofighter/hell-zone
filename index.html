@@ -11,7 +11,7 @@
       --card-inner: rgba(0, 0, 0, 0.35);
       --accent: #00f0ff;
       --accent-glow: rgba(0, 240, 255, 0.28);
-      --glyph-glow: rgba(255, 255, 255, 0.75);
+      --glyph-glow: rgba(255, 255, 255, 0.8);
       --border: rgba(255, 255, 255, 0.08);
       --text: #f0f4f8;
       --text-muted: #7e8c9f;
@@ -82,7 +82,7 @@
       align-items: center;
     }
 
-    /* АВАТАРКА И ТОЧНЫЕ ГЛИФЫ NOTHING PHONE (3A) */
+    /* ИДЕАЛЬНО ОТЦЕНТРОВАННЫЙ БЛОК ГЛИФОВ */
     .avatar-container {
       position: relative;
       width: 160px;
@@ -97,11 +97,12 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 160px;
+      height: 160px;
       pointer-events: none;
       filter: drop-shadow(0 0 7px var(--glyph-glow));
       animation: glyphBlink 4s infinite ease-in-out;
+      z-index: 1;
     }
 
     .avatar-container:hover .glyph-svg {
@@ -111,13 +112,14 @@
     }
 
     .avatar {
-      width: 98px;
-      height: 98px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.2);
       z-index: 2;
       transition: transform 0.3s ease;
+      background: #11141e;
     }
 
     .avatar-container:hover .avatar {
@@ -205,7 +207,7 @@
     /* ЭТАЖ 2: ПЛЕЕР + ИГРЫ */
     .bottom-row {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 24px;
     }
 
@@ -219,7 +221,7 @@
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
     }
 
-    /* СТИЛИ ПЛЕЕРА */
+    /* ПЛЕЕР */
     .player-layout {
       display: flex;
       gap: 20px;
@@ -227,8 +229,8 @@
     }
 
     .player-cover {
-      width: 90px;
-      height: 90px;
+      width: 95px;
+      height: 95px;
       border-radius: 16px;
       object-fit: cover;
       border: 1px solid var(--border);
@@ -258,7 +260,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 260px;
+      max-width: 250px;
     }
 
     .progress-container {
@@ -283,12 +285,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
       margin-top: 4px;
     }
 
     .ctrl-btn-group {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
 
     .ctrl-btn {
@@ -309,8 +312,42 @@
       color: var(--accent);
     }
 
-    .time-stamp {
+    /* РЕГУЛЯТОР ГРОМКОСТИ */
+    .volume-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .volume-icon {
       font-size: 0.75rem;
+      color: var(--text-muted);
+      user-select: none;
+    }
+
+    .volume-slider {
+      -webkit-appearance: none;
+      width: 65px;
+      height: 4px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.15);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+      cursor: pointer;
+    }
+
+    .time-stamp {
+      font-size: 0.72rem;
       color: var(--text-muted);
       font-variant-numeric: tabular-nums;
     }
@@ -418,16 +455,20 @@
     <div class="profile-card">
       <div class="left-col">
         <div class="avatar-container">
-          <!-- Глифы Phone (3a) выровнены по внешнему радиусу -->
+          <!-- Геометрически выверенные глифы Phone (3a) вокруг круга 100px (R=50) -->
           <svg class="glyph-svg" viewBox="0 0 160 160">
-            <!-- Верхняя левая дуга -->
-            <path d="M 32 44 A 65 65 0 0 1 82 15" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
-            <!-- Нижняя левая палочка -->
-            <path d="M 27 114 L 40 128" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
-            <!-- Правая вертикальная дуга -->
-            <path d="M 145 66 A 65 65 0 0 1 140 122" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+            <!-- 1. Верхняя левая дуга: R=63, от 135° до 240° -->
+            <path d="M 35.4 35.4 A 63 63 0 0 1 111.5 25.4" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+            
+            <!-- 2. Нижняя левая палочка под 45° -->
+            <path d="M 32 128 L 44 116" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+            
+            <!-- 3. Правая вертикальная дуга: R=63, от -35° до +40° -->
+            <path d="M 131.6 43.9 A 63 63 0 0 1 128.2 120.5" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
           </svg>
-          <img class="avatar" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300" alt="Avatar">
+
+          <!-- Твоя аватарка: если зальешь файл avatar.png в репозиторий, он сразу встанет сюда -->
+          <img class="avatar" src="avatar.jpg" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300'" alt="Avatar">
         </div>
 
         <div class="info-wrapper">
@@ -501,6 +542,13 @@
                 <button class="ctrl-btn" id="play-btn" onclick="togglePlay()">▶</button>
                 <button class="ctrl-btn" onclick="nextTrack()">⏭</button>
               </div>
+
+              <!-- Ползунок громкости -->
+              <div class="volume-group">
+                <span class="volume-icon">🔊</span>
+                <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.01" value="0.3" oninput="setVolume(this.value)">
+              </div>
+
               <span id="time-display" class="time-stamp">0:00 / 0:00</span>
             </div>
           </div>
@@ -533,7 +581,6 @@
   <div id="toast" class="toast"></div>
 
   <script>
-    // Плейлист с твоими загруженными файлами
     const playlist = [
       {
         artist: "LAZZY2WICE",
@@ -563,6 +610,13 @@
     const trackCover = document.getElementById('track-cover');
     const progressBar = document.getElementById('progress-bar');
     const timeDisplay = document.getElementById('time-display');
+
+    // Установка стартовой безопасной громкости 30%
+    audio.volume = 0.3;
+
+    function setVolume(val) {
+      audio.volume = parseFloat(val);
+    }
 
     function loadTrack(idx) {
       const track = playlist[idx];
@@ -627,7 +681,7 @@
       return m + ':' + (s < 10 ? '0' : '') + s;
     }
 
-    // ЗВУКОВЫЕ ЭФФЕКТЫ
+    // Аудио эффекты (громкость снижена)
     let audioCtx = null;
     function getAudioCtx() {
       if (!audioCtx) {
@@ -644,8 +698,8 @@
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(140, ctx.currentTime);
         osc.frequency.exponentialRampToValueAtTime(35, ctx.currentTime + 0.04);
-        gain.gain.setValueAtTime(0.25, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.005, ctx.currentTime + 0.04);
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start();
@@ -658,6 +712,7 @@
         const ctx = getAudioCtx();
         const dur = 2.4;
         const now = ctx.currentTime;
+
         const bufferSize = ctx.sampleRate * dur;
         const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const data = buffer.getChannelData(0);
@@ -676,8 +731,8 @@
         filter.frequency.exponentialRampToValueAtTime(220, now + 2.3);
 
         const gain = ctx.createGain();
-        gain.gain.setValueAtTime(0.01, now);
-        gain.gain.exponentialRampToValueAtTime(0.7, now + 0.9);
+        gain.gain.setValueAtTime(0.005, now);
+        gain.gain.exponentialRampToValueAtTime(0.35, now + 0.9);
         gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
 
         noise.connect(filter);
