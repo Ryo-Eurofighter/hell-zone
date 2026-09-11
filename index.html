@@ -13,14 +13,10 @@
     }
 
     :root {
-      /* ЧИСТЫЙ ЧЁРНЫЙ ДЛЯ БЛОКОВ */
       --card-bg: #08090b;
       --card-inner: #101216;
-      
-      /* ФИРМЕННЫЙ КРАСНЫЙ ДЛЯ ВСЕХ КНОПОК */
       --nothing-red: #eb0029;
       --red-hover: #ff1c3d;
-      
       --border: rgba(255, 255, 255, 0.09);
       --border-light: rgba(255, 255, 255, 0.16);
       --text: #ffffff;
@@ -34,7 +30,6 @@
       font-family: 'NDot-57', monospace, sans-serif;
     }
 
-    /* ЗАДНИЙ ФОН: ГРАДИЕНТ СВЕТЛО-СЕРЫЙ -> ТЁМНО-СЕРЫЙ */
     body {
       min-height: 100vh;
       background: linear-gradient(180deg, #383e48 0%, #20242b 45%, #0e1013 100%);
@@ -49,13 +44,13 @@
 
     .main-container {
       width: 100%;
-      max-width: 1040px;
+      max-width: 1080px;
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
 
-    /* ЭТАЖ 1: ПРОФИЛЬ + СЕТКА */
+    /* ЭТАЖ 1: ПРОФИЛЬ */
     .profile-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -121,7 +116,7 @@
       letter-spacing: 0.5px;
     }
 
-    /* ВСЕ КНОПКИ КРАСНЫЕ */
+    /* КНОПКИ */
     .right-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -161,10 +156,10 @@
       letter-spacing: 0.5px;
     }
 
-    /* ЭТАЖ 2: ПЛЕЕР + ИГРЫ */
+    /* ЭТАЖ 2: ТРИ КОЛОНКИ (ПЛЕЕР / ИГРЫ / ГАЛЕРЕЯ) */
     .bottom-row {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.15fr 0.95fr 0.9fr;
       gap: 20px;
     }
 
@@ -172,21 +167,24 @@
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 28px;
-      padding: 24px;
+      padding: 22px;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+      display: flex;
+      flex-direction: column;
     }
 
     /* ПЛЕЕР */
     .player-layout {
       display: flex;
-      gap: 20px;
+      gap: 16px;
       align-items: center;
+      height: 100%;
     }
 
     .player-cover {
-      width: 95px;
-      height: 95px;
-      border-radius: 20px;
+      width: 85px;
+      height: 85px;
+      border-radius: 18px;
       object-fit: cover;
       border: 1px solid var(--border-light);
       background: #121317;
@@ -201,24 +199,24 @@
     }
 
     .track-artist {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--nothing-red);
       letter-spacing: 2px;
     }
 
     .track-title {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       color: #fff;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 250px;
+      max-width: 170px;
       letter-spacing: 1px;
     }
 
     .progress-container {
       width: 100%;
-      height: 6px;
+      height: 5px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 10px;
       cursor: pointer;
@@ -237,23 +235,23 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-top: 4px;
+      gap: 8px;
+      margin-top: 2px;
     }
 
     .ctrl-btn-group {
       display: flex;
-      gap: 8px;
+      gap: 6px;
     }
 
     .ctrl-btn {
       background: #16181e;
       border: 1px solid var(--border);
       color: #fff;
-      border-radius: 12px;
-      padding: 7px 14px;
+      border-radius: 10px;
+      padding: 6px 10px;
       cursor: pointer;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       transition: all 0.2s ease;
     }
 
@@ -265,18 +263,18 @@
     .volume-group {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
     }
 
     .volume-icon {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       user-select: none;
     }
 
     .volume-slider {
       -webkit-appearance: none;
-      width: 65px;
+      width: 50px;
       height: 4px;
       border-radius: 5px;
       background: rgba(255, 255, 255, 0.2);
@@ -287,55 +285,110 @@
     .volume-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 12px;
-      height: 12px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
       background: var(--nothing-red);
       cursor: pointer;
     }
 
     .time-stamp {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       letter-spacing: 0.5px;
     }
 
     /* ИГРЫ */
-    .games-card h3 {
-      font-size: 0.95rem;
+    .games-card h3, .gallery-card h3 {
+      font-size: 0.9rem;
       color: var(--nothing-red);
       letter-spacing: 2px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .games-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 10px;
     }
 
     .platform-col h4 {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       letter-spacing: 1px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .game-badge {
       display: block;
       background: var(--card-inner);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 8px 12px;
-      font-size: 0.88rem;
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
       letter-spacing: 0.5px;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       color: var(--text);
       transition: border-color 0.2s;
     }
 
     .game-badge:hover {
       border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    /* ГАЛЕРЕЯ (АВТОМАТИЧЕСКАЯ ЧЕРЕЗ API) */
+    .gallery-container {
+      position: relative;
+      width: 100%;
+      height: 125px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--card-inner);
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.35s ease;
+    }
+
+    .gallery-controls {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .gallery-btn {
+      background: rgba(8, 9, 11, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      color: #fff;
+      border-radius: 8px;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s ease;
+    }
+
+    .gallery-btn:hover {
+      background: var(--nothing-red);
+      border-color: transparent;
+    }
+
+    .gallery-counter {
+      font-size: 0.75rem;
+      color: var(--text-muted);
     }
 
     /* СЧЁТЧИК ПОСЕЩЕНИЙ */
@@ -400,11 +453,19 @@
       opacity: 1;
     }
 
-    @media (max-width: 950px) {
-      .profile-card, .bottom-row {
+    @media (max-width: 1000px) {
+      .bottom-row {
+        grid-template-columns: 1fr;
+      }
+      .gallery-container {
+        height: 180px;
+      }
+    }
+
+    @media (max-width: 850px) {
+      .profile-card {
         grid-template-columns: 1fr;
         padding: 24px;
-        gap: 20px;
       }
     }
 
@@ -448,7 +509,6 @@
         </div>
       </div>
 
-      <!-- Все 8 кнопок теперь ярко-красные -->
       <div class="right-col">
         <a href="https://steamcommunity.com/profiles/76561199693464578/" target="_blank" class="btn" onclick="playHaptic()">
           <span>STEAM</span>
@@ -492,7 +552,7 @@
       </div>
     </div>
 
-    <!-- Нижний этаж -->
+    <!-- Нижний этаж: 3 колонки -->
     <div class="bottom-row">
       <!-- Плеер -->
       <div class="sub-card">
@@ -542,11 +602,26 @@
           </div>
         </div>
       </div>
+
+      <!-- Галерея (GitHub API) -->
+      <div class="sub-card gallery-card">
+        <h3>
+          <span>ARCHIVE // SHOTS</span>
+          <span id="gallery-counter" class="gallery-counter">-- / --</span>
+        </h3>
+        <div class="gallery-container">
+          <img id="gallery-image" class="gallery-img" src="" alt="Gallery Shot">
+          <div class="gallery-controls">
+            <button class="gallery-btn" onclick="prevPhoto()">‹</button>
+            <button class="gallery-btn" onclick="nextPhoto()">›</button>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
 
-  <!-- Виджет счётчика -->
+  <!-- Счётчик в правом нижнем углу -->
   <div class="visitor-badge">
     <div class="live-dot"></div>
     <span>SIGNALS // <span id="visit-count" class="visitor-count">...</span></span>
@@ -556,6 +631,7 @@
   <div id="toast" class="toast"></div>
 
   <script>
+    // МУЗЫКАЛЬНЫЙ ПЛЕЕР
     const playlist = [
       {
         artist: "LAZZY2WICE",
@@ -655,6 +731,65 @@
       return m + ':' + (s < 10 ? '0' : '') + s;
     }
 
+    // ДИНАМИЧЕСКАЯ ГАЛЕРЕЯ ЧЕРЕЗ GITHUB API
+    let galleryPhotos = [];
+    let currentPhotoIdx = 0;
+    const galleryImg = document.getElementById('gallery-image');
+    const galleryCounter = document.getElementById('gallery-counter');
+
+    function updateGallery() {
+      if (!galleryPhotos.length) return;
+      galleryImg.style.opacity = '0.2';
+      setTimeout(() => {
+        galleryImg.src = galleryPhotos[currentPhotoIdx];
+        galleryCounter.innerText = 
+          String(currentPhotoIdx + 1).padStart(2, '0') + ' / ' + 
+          String(galleryPhotos.length).padStart(2, '0');
+        galleryImg.style.opacity = '1';
+      }, 150);
+    }
+
+    function nextPhoto() {
+      if (galleryPhotos.length < 2) return;
+      playHaptic();
+      currentPhotoIdx = (currentPhotoIdx + 1) % galleryPhotos.length;
+      updateGallery();
+    }
+
+    function prevPhoto() {
+      if (galleryPhotos.length < 2) return;
+      playHaptic();
+      currentPhotoIdx = (currentPhotoIdx - 1 + galleryPhotos.length) % galleryPhotos.length;
+      updateGallery();
+    }
+
+    // Стучимся в GitHub API репозитория и забираем все картинки из папки gallery
+    fetch('https://api.github.com/repos/ryo-eurofighter/hell-zone/contents/gallery')
+      .then(res => res.json())
+      .then(files => {
+        if (Array.isArray(files)) {
+          galleryPhotos = files
+            .filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f.name))
+            .map(f => f.download_url || f.path);
+
+          if (galleryPhotos.length > 0) {
+            updateGallery();
+          }
+        }
+      })
+      .catch(err => {
+        console.error('Ошибка загрузки галереи через API:', err);
+      });
+
+    // Автопрокрутка фото каждые 5 секунд
+    setInterval(() => {
+      if (galleryPhotos.length > 1) {
+        currentPhotoIdx = (currentPhotoIdx + 1) % galleryPhotos.length;
+        updateGallery();
+      }
+    }, 5000);
+
+    // СЧЁТЧИК ПОСЕЩЕНИЙ
     fetch('https://api.counterapi.dev/v1/ryo_eurofighter_page/visits/up')
       .then(res => res.json())
       .then(data => {
@@ -665,6 +800,7 @@
         document.getElementById('visit-count').innerText = '0001';
       });
 
+    // АУДИОСИСТЕМА (HAPTIC & FLYBY)
     let audioCtx = null;
     function getAudioCtx() {
       if (!audioCtx) {
@@ -726,6 +862,7 @@
       } catch (e) {}
     }
 
+    // СИСТЕМА УВЕДОМЛЕНИЙ (TOAST)
     let toastTimeout;
     function showToast(text) {
       playHaptic();
